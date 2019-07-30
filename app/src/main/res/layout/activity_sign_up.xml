@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradientall"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <EditText
+            android:id="@+id/txtName"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_name"
+            android:ems="10"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:padding="2dp"></Spinner>
+
+
+        <EditText
+            android:id="@+id/txtDate"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinner"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_dob"
+            android:ems="10"
+            android:hint="Date Of Birth"
+            android:inputType="textPersonName"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+
+        <EditText
+            android:id="@+id/txtPhone"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/txtDate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_mobile"
+            android:ems="10"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/txtEmailS"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_below="@+id/txtPhone"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_mail"
+            android:ems="10"
+            android:hint="Enter valid email id"
+            android:inputType="textPersonName"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/txtAddress"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/txtEmailS"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_address"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPostalAddress"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/txt_password"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAddress"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            android:textColorHint="#696666"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPasswordS"
+                style="@android:style/Widget.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:background="#11000000"
+                android:drawableLeft="@drawable/ic_action_pass"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#FFFDFD"
+                android:textColorHint="#696666"
+                android:textSize="16sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <EditText
+            android:id="@+id/txtConfirmPassword"
+            style="@android:style/Widget.EditText"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/txt_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="#11000000"
+            android:drawableLeft="@drawable/ic_action_pass"
+            android:ems="10"
+            android:hint="Re-enter Password"
+            android:inputType="textPassword"
+            android:textColor="#FFFDFD"
+            android:textColorHint="#696666"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txtConfirmPassword"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="25dp"
+            android:layout_centerHorizontal="true"
+            app:cardElevation="10dp"
+            android:layout_marginTop="40dp"
+            android:id="@+id/cardViewS">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/cardViewS">
+
+                <TextView
+                    android:id="@+id/txtLoginS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Signup"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardViewS"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Already registered??"
+                android:textColor="#FAF4F4" />
+
+            <Button
+                android:id="@+id/btnRegisterHereS"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Login here"
+                android:textColor="#33D53A"
+                android:theme="@style/FlatButton" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
