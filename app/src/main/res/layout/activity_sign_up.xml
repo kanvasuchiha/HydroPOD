@@ -76,29 +76,40 @@
             android:textColorHint="#696666"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/txtEmailS"
-            style="@android:style/Widget.EditText"
-            android:layout_width="300dp"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/txt_email"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtPhone"
-            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:background="#11000000"
-            android:drawableLeft="@drawable/ic_action_mail"
-            android:ems="10"
-            android:hint="Enter valid email id"
-            android:inputType="textPersonName"
-            android:textColor="#FFFDFD"
             android:textColorHint="#696666"
-            android:textSize="16sp" />
+            app:errorEnabled="true"
+            android:layout_marginTop="30dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmailS"
+                style="@android:style/Widget.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:background="#11000000"
+                android:drawableLeft="@drawable/ic_action_mail"
+                android:ems="10"
+                android:hint="Enter valid email id"
+                android:inputType="textPersonName"
+                android:textColor="#FFFDFD"
+                android:textColorHint="#696666"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <EditText
             android:id="@+id/txtAddress"
             style="@android:style/Widget.EditText"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/txtEmailS"
+            android:layout_below="@+id/txt_email"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="#11000000"
@@ -122,6 +133,8 @@
             app:counterEnabled="true"
             app:counterMaxLength="20"
             android:textColorHint="#696666"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -180,6 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:onClick="confirmInput"
                     android:text="Signup"
                     android:textColor="#fff"
                     android:textSize="20dp" />
