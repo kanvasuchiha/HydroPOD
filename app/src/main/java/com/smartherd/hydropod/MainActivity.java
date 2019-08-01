@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.parse.ParseObject;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textEmail = findViewById(R.id.txt_email);
         textPassword = findViewById(R.id.txt_password);
+
 
         spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sex, R.layout.color_spinner_layout);
@@ -91,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-    }
+
+   }
 
 
     private Boolean validateEmail() {
@@ -139,11 +142,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void confirmInput(View v) {
+
         if (!validateEmail() | !validatePassword()) {
             return;
         }
 
+
+        ParseObject client = new ParseObject("Client");
         Toast.makeText(MainActivity.this, "Successfully signed up", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

@@ -4,4 +4,9 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">n1ivzBnvfshLCusxsOIiyQUIp0deuc3DNt75L5TB</string>
+    <string name="back4app_client_key">88Z2KFuPIYe9P0CxL0NrzI52W0Mami6qsW8yAgfa</string>
 </resources>
