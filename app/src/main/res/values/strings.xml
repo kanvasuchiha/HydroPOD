@@ -9,4 +9,21 @@
     <!-- Change the following strings as required -->
     <string name="back4app_app_id">n1ivzBnvfshLCusxsOIiyQUIp0deuc3DNt75L5TB</string>
     <string name="back4app_client_key">88Z2KFuPIYe9P0CxL0NrzI52W0Mami6qsW8yAgfa</string>
+    <string name="title_activity_client_menu">ClientMenu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_client_menus">clientMenus</string>
+    <string name="title_activity_user">userActivity</string>
+    <string name="title_activity_admin_home">adminHome</string>
 </resources>

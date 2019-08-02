@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/add_crop"
+            android:icon="@drawable/addcrop"
+            android:title="Add crop to a site" />
+        <item
+            android:id="@+id/ad_plantation_site"
+            android:icon="@drawable/plant"
+            android:title="Request new plantation site" />
+        <item
+            android:id="@+id/check_sensor_values"
+            android:icon="@drawable/sensorvalues"
+            android:title="Check current sensor values" />
+        <item
+            android:id="@+id/admin_notifications"
+            android:icon="@drawable/adminnoti"
+            android:title="Admin Notifications" />
+    </group>
+
+
+
+    <item android:title="Set Alert Tones"
+        >
+        <menu>
+            <item android:title="Temperature alert"
+                android:icon="@drawable/alerttone"></item>
+            <item android:title="Solution level alert"
+                android:icon="@drawable/alerttone"></item>
+            <item android:title="Humidity alert"
+                android:icon="@drawable/alerttone"></item>
+        </menu>
+    </item>
+
+
+    <item android:title="Support and info">
+        <menu>
+            <item
+                android:id="@+id/admin_query"
+                android:icon="@drawable/support"
+                android:title="Support" />
+            <item
+                android:id="@+id/see_crop"
+                android:icon="@drawable/selectcrop"
+                android:title="See crop details" />
+        </menu>
+    </item>
+
+</menu>

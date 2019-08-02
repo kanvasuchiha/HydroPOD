@@ -1,9 +1,15 @@
 package com.smartherd.hydropod;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,15 +18,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -29,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String texts;
     private TextView txtDate;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
+
+//    private DrawerLayout drawer;
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -39,20 +53,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //"(?=.*[a-zA-Z])" +      //any letter
                     "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
-                    //".{4,}" +               //at least 4 characters
+                    ".{4,}" +               //at least 4 characters
                     "$");
 
 
-    private TextInputLayout textEmail, textPassword;
+    private TextInputLayout textEmail, textPassword, txtConfirmPassword;
+    private EditText txtName, txtPhone, txtAddress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
         setContentView(R.layout.activity_sign_up);
 
 
+
+        /*
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+        drawer=findViewById(R.id.user_drawer);
+
+        ActionBarDrawerToggle toggle;
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        */
+
+
+
+
+
+
+        txtName = findViewById(R.id.txtName);
+        txtPhone = findViewById(R.id.txtPhone);
+        txtAddress = findViewById(R.id.txtAddress);
+        txtConfirmPassword = findViewById(R.id.txt_confirm_password);
         textEmail = findViewById(R.id.txt_email);
         textPassword = findViewById(R.id.txt_password);
+
 
 
         spinner = findViewById(R.id.spinner);
@@ -60,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
 
         txtDate = findViewById(R.id.txtDate);
         txtDate.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 DatePickerDialog dialog = new DatePickerDialog(MainActivity.this,
-                        android.R.style.Theme_DeviceDefault_Light_DarkActionBar, onDateSetListener, year, month, day);
+                        android.R.style.Theme_Black_NoTitleBar, onDateSetListener, year, month, day);
 
                 //TO MAKE BACKGROUND TRANSPARENT
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -86,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int date) {
 
-                String monthString = new DateFormatSymbols().getMonths()[month - 1];
+                String monthString = new DateFormatSymbols().getMonths()[month];
 
                 String dat = date + " " + monthString + " " + year;
                 txtDate.setText(dat);
@@ -94,7 +140,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
 
-   }
+    }
+
+
+/*
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+*/
+
 
 
     private Boolean validateEmail() {
@@ -121,35 +180,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (emailInput.isEmpty()) {
             textPassword.setError("Field can't be empty");
             return false;
-        } else if (emailInput.length() < 9) {
+        } else if (emailInput.length() <8) {
             textPassword.setError("Atleast have length 8");
             return false;
         } else if (emailInput.length() > 20) {
             textPassword.setError("Password too longgggggggggg........");
             return false;
-        }
-        else if(!PASSWORD_PATTERN.matcher(emailInput).matches())
-        {
+        } else if (!PASSWORD_PATTERN.matcher(emailInput).matches()) {
             textPassword.setError("Weak Password. Atleast have a small letter, a capital letter, a digit and a special character.");
             return false;
-        }
-        else {
+        } else {
             textPassword.setError(null);
             textPassword.setErrorEnabled(false);
         }
         return true;
     }
 
+    private Boolean matchPasswords() {
+        String passwordInput = textPassword.getEditText().getText().toString().trim();
+        String confirmPasswordInput = txtConfirmPassword.getEditText().getText().toString().trim();
+        if (!passwordInput.equals(confirmPasswordInput)) {
+            txtConfirmPassword.setError("Passwords do not match.");
+            return false;
+        } else {
+            txtConfirmPassword.setError(null);
+            txtConfirmPassword.setErrorEnabled(false);
+        }
+        return true;
+    }
 
-    public void confirmInput(View v) {
 
-        if (!validateEmail() | !validatePassword()) {
+
+
+    public void confirmInput(View v) throws java.text.ParseException {
+
+        if (!validateEmail() | !validatePassword() | !matchPasswords() && txtName.getText().toString().isEmpty() && txtPhone.getText().toString().isEmpty() && txtAddress.getText().toString().isEmpty()) {
+            Toast.makeText(MainActivity.this, "Some fields are empty or wrong. Check above", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
+
+        Date date1 = new  SimpleDateFormat("dd MMMMM yyyy").parse(txtDate.getText().toString());
+
         ParseObject client = new ParseObject("Client");
-        Toast.makeText(MainActivity.this, "Successfully signed up", Toast.LENGTH_LONG).show();
+        client.put("Full_Name", txtName.getText().toString());
+        client.put("Sex", spinner.getSelectedItem().toString());
+        client.put("DOB", date1);
+        client.put("Mobile_Number", txtPhone.getText().toString());
+        client.put("Email_address", textEmail.getEditText().getText().toString().trim());
+        client.put("Current_address", txtAddress.getText().toString());
+        client.put("Password", textPassword.getEditText().getText().toString().trim());
+        client.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Toast.makeText(MainActivity.this, "Congratulation "+txtName.getText().toString()+"!\nYou have successfully signed up", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
 
     }
 
