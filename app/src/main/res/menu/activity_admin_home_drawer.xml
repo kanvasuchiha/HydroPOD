@@ -30,5 +30,12 @@
                 android:title="Send notifications" />
         </menu>
     </item>
-
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:title = "Logout"
+                android:id="@+id/logout_admin"
+            android:icon="@drawable/logout"/>
+        </menu>
+    </item>
 </menu>

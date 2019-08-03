@@ -49,5 +49,13 @@
                 android:title="See crop details" />
         </menu>
     </item>
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:title = "Logout"
+                android:id="@+id/logout_user"
+                android:icon="@drawable/logout"/>
+        </menu>
+    </item>
 
 </menu>
