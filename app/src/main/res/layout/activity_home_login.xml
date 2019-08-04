@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/gradientall"
+    >
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/gradientall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgLogoL"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="96dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/pod2" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgLogoL"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:textColorHint="#696666"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUsernameL"
+                style="@android:style/Widget.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_alignStart="@+id/txt1"
+                android:layout_centerHorizontal="true"
+                android:background="#11000000"
+                android:drawableLeft="@drawable/ic_action_user"
+                android:ems="10"
+                android:hint="Email"
+                android:layout_margin="5dp"
+                android:inputType="textEmailAddress"
+                android:textColor="#FFFDFD"
+                android:textColorHint="#696666"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:textColorHint="#696666"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPasswordL"
+                style="@android:style/Widget.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/txt1"
+                android:layout_alignStart="@+id/txt2"
+                android:layout_centerHorizontal="false"
+                android:background="#11000000"
+                android:drawableLeft="@drawable/ic_action_pass"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#FFFDFD"
+                android:textColorHint="#696666"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewL"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txt2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/cardViewL">
+
+                <TextView
+                    android:id="@+id/txtLoginL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Login"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardViewL"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Haven't registered yet?"
+                android:textColor="#FAF4F4"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/btnRegisterHereL"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Register here"
+                android:textColor="#33D53A"
+                android:textSize="10sp"
+                android:theme="@style/FlatButton" />
+        </LinearLayout>
+    </RelativeLayout>
+    <include
+        layout="@layout/app_bar_home_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

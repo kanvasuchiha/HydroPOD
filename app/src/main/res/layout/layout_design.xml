@@ -9,6 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/textMasterPassword"
         android:textColorHint="#696666"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="#000"
@@ -16,7 +17,6 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:id="@+id/textPassword"
             android:background="#EEECEC"
             android:layout_height="match_parent"
             android:padding="5dp"

@@ -14,25 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".home_login"
+            android:label="@string/title_activity_home_login"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".consultantHome"
             android:label="@string/title_activity_consultant_home"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".adminHome"
             android:label="@string/title_activity_admin_home"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".userActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-
-        <activity android:name=".SignUp">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SignUp"></activity>
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -46,14 +49,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
+        <activity android:name=".AdminLogin"/>
     </application>
 
 </manifest>

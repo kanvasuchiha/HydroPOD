@@ -27,4 +27,5 @@
     <string name="title_activity_user">userActivity</string>
     <string name="title_activity_admin_home">adminHome</string>
     <string name="title_activity_consultant_home">consultantHome</string>
+    <string name="title_activity_home_login">home_login</string>
 </resources>

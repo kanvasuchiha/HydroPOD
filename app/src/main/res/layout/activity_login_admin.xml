@@ -6,21 +6,33 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imgLogoL"
+        android:id="@+id/imgLogoL_admin"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/adminhi"
         android:layout_marginTop="96dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/pod2" />
+
+    <TextView
+        android:id="@+id/adminhi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Hi there, Admin!"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgLogoL"
+        android:layout_below="@+id/imgLogoL_admin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp"
         android:textColorHint="#696666"
