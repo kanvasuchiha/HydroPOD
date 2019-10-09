@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gradientall"
+    android:background="@drawable/backg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/adminhi"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="150dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/pod2" />
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:text="Hi there, Admin!"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -114,31 +114,9 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cardViewL"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Haven't registered yet?"
-            android:textColor="#FAF4F4"
-            android:textSize="10sp" />
-
-        <Button
-            android:id="@+id/btnRegisterHereL"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Register here"
-            android:textColor="#33D53A"
-            android:textSize="10sp"
-            android:theme="@style/FlatButton" />
-    </LinearLayout>
+    <include
+        layout="@layout/app_bar_home_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 </RelativeLayout>

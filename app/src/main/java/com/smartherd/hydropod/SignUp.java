@@ -1,9 +1,12 @@
 package com.smartherd.hydropod;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,7 +39,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
 
 
 
-    private Spinner spinner;
+    private Spinner spinner, spinner2;
     private String texts;
     private TextView txtDate;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
@@ -64,6 +68,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         setContentView(R.layout.activity_sign_up);
+
 
 
 
@@ -106,6 +111,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this); /////////////
 
+        spinner2 = findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.Role, R.layout.color_spinner_layout);
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_layout);
+        spinner2.setAdapter(adapter2);
+        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+
         txtDate = findViewById(R.id.txtDate);
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +128,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
 
 
                 DatePickerDialog dialog = new DatePickerDialog(SignUp.this,
-                        android.R.style.Theme_Black_NoTitleBar, onDateSetListener, year, month, day);
+                        android.R.style.Theme_Black_NoTitleBar_Fullscreen, onDateSetListener, year, month, day);
 
                 //TO MAKE BACKGROUND TRANSPARENT
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -211,13 +222,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
 
 
     public void confirmInput(View v) throws java.text.ParseException {
+        textEmail.setError(null);
+        textPassword.setError(null);
 
         if (!validateEmail() | !validatePassword() | !matchPasswords() && txtName.getText().toString().isEmpty() && txtPhone.getText().toString().isEmpty() && txtAddress.getText().toString().isEmpty()) {
             Toast.makeText(SignUp.this, "Some fields are empty or wrong. Check above", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
+        Intent intent=getIntent();
+        int id= Integer.parseInt(intent.getStringExtra("ID_USER"));
 
         Date date1 = new SimpleDateFormat("dd MMMMM yyyy").parse(txtDate.getText().toString());
 
@@ -229,6 +243,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         client.put("Mobile_Number", txtPhone.getText().toString());
         client.put("Email_address", textEmail.getEditText().getText().toString().trim());
         client.put("Current_address", txtAddress.getText().toString());
+        if(id==R.id.login_consultant)
+        {
+            client.put("Access_Level", "Consultant");
+        }
+        else if(id==R.id.login_user)
+        {
+            client.put("Access_Level", "User");
+        }
 
 
 
@@ -246,15 +268,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         });
 
 
+        final String name = txtName.getText().toString();
         user.setPassword(textPassword.getEditText().getText().toString().trim());
         user.setUsername(textEmail.getEditText().getText().toString().trim());
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    //alertDisplayer("Sucessful Sign Up!","Welcome" + <Insert Username Here> + "!");
+                    alertDisplayer("Successfully Signed up.","You have successfully signed up "+name+"\nYou will have to wait till our admin actually confirms your account. Until later then, Sayonara!!");
                     Toast.makeText(SignUp.this, "Congratulation "+txtName.getText().toString()+"!\nYou have successfully signed up as user", Toast.LENGTH_LONG).show();
-
                 } else {
                     ParseUser.logOut();
                     Toast.makeText(SignUp.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -280,9 +302,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
     }
 
 
-    /*
+
     private void alertDisplayer(String title,String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(LogIn.this)
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -290,7 +312,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         // don't forget to change the line below with the names of your Activities
-                        Intent intent = new Intent(MainActivity.this, LogoutActivity.class);
+                        Intent intent = new Intent(SignUp.this, home_login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
@@ -298,9 +320,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         AlertDialog ok = builder.create();
         ok.show();
     }
-    */
-
-
 
 
 

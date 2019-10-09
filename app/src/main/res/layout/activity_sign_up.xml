@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradientall"
+    android:background="@drawable/gradi"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -12,14 +12,12 @@
         android:layout_height="match_parent">
 
 
-
-
         <EditText
             android:id="@+id/txtName"
             style="@android:style/Widget.EditText"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_below="@id/card2"
+            android:layout_below="@id/textView2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="#11000000"
@@ -40,13 +38,23 @@
             android:layout_marginTop="30dp"
             android:padding="2dp"></Spinner>
 
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/spinner"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:entries="@array/Role"
+            android:padding="2dp"></Spinner>
+
 
         <EditText
             android:id="@+id/txtDate"
             style="@android:style/Widget.EditText"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_below="@id/spinner"
+            android:layout_below="@id/spinner2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="#11000000"
@@ -71,22 +79,22 @@
             android:drawableLeft="@drawable/ic_action_mobile"
             android:ems="10"
             android:hint="Mobile Number"
-            android:maxLength="10"
             android:inputType="phone"
+            android:maxLength="10"
             android:textColor="#FFFDFD"
             android:textColorHint="#696666"
             android:textSize="16sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
             android:id="@+id/txt_email"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtPhone"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:textColorHint="#696666"
-            app:errorEnabled="true"
-            android:layout_marginTop="30dp">
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmailS"
@@ -122,21 +130,19 @@
             android:textSize="16sp" />
 
 
-
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
             android:id="@+id/txt_password"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtAddress"
-            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textColorHint="#696666"
             app:counterEnabled="true"
             app:counterMaxLength="20"
-            android:textColorHint="#696666"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#fff"
-            >
+            app:passwordToggleTint="#fff">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPasswordS"
@@ -151,28 +157,27 @@
                 android:inputType="textPassword"
                 android:textColor="#FFFDFD"
                 android:textColorHint="#696666"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_confirm_password"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txt_password"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:textColorHint="#696666"
             app:counterEnabled="true"
             app:counterMaxLength="20"
-            android:textColorHint="#696666"
-            app:errorEnabled="true"
-            android:layout_height="wrap_content">
+            app:errorEnabled="true">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
                 android:id="@+id/txtConfirmPasswordS"
                 style="@android:style/Widget.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:background="#11000000"
                 android:drawableLeft="@drawable/ic_action_pass"
                 android:ems="10"
@@ -184,17 +189,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewS"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_below="@+id/txt_confirm_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="25dp"
-            android:layout_centerHorizontal="true"
-            app:cardElevation="10dp"
-            android:layout_marginTop="40dp"
-            android:id="@+id/cardViewS">
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -218,88 +222,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardViewS"
-            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
-                android:text="Already registered??"
-                android:textColor="#FAF4F4" />
+                android:text="Already registered?? Press back to go to Login screen."
+                android:textColor="#3F51B5"
+                android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/btnRegisterHereS"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Login here"
-                android:textColor="#33D53A"
-                android:theme="@style/FlatButton" />
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card2"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView5"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="4dp"
-            android:backgroundTint="#11000000"
-            app:cardCornerRadius="5dp"
-            android:paddingTop="30dp"
-            app:cardElevation="0dp">
+            android:layout_margin="10dp"
+            android:text="Team Hydropod will be extremely happy to have you. Signup using a simple form and stay connected to your remote farms and latest news forever. Thanks!"
+            android:textAlignment="textStart"
+            android:textColor="#1F201F"
+            android:textSize="14sp" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="15dp">
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textAlignment="textStart"
-                android:text="Team Hydropod will be extremely happy to have you. Signup using a simple form and stay connected to your remote farms and latest news forever. Thanks!"
-                android:textColor="#EEF1EE"
-                android:textSize="14sp" />
+                android:layout_alignParentTop="true"
+                android:background="#62A3C2"
+                android:text="Welcome new user"
+                android:paddingLeft="10dp"
+                android:textColor="#FFFEFE"
+                android:textSize="36sp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
-        <View
-            android:id="@+id/divider1"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="2dp"
-            android:layout_below="@id/textView4"
-            android:layout_marginTop="7dp"
-            android:background="#3F51B5"
-            android:fadingEdgeLength="20dp"
-            android:elevation="0dp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Welcome new user"
-            android:textColor="#ECEAEA"
-            android:textSize="36sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/divider1"
+            android:layout_below="@id/card34"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:textColor="#F1EAEA"
-            android:textSize="18dp"
-            android:layout_marginLeft="20dp"
-            android:text="Kudos!  You are just a step away from joining us." />
+            android:text="Kudos!  You are just a step away from joining us."
+            android:textColor="#1B1919"
+            android:textSize="18dp" />
 
 
     </RelativeLayout>
