@@ -8,11 +8,6 @@
         />
     <item
         android:id="@+id/login_user"
-        android:title="User login"
-        />
-
-    <item
-        android:id="@+id/login_consultant"
-        android:title="Consultant login"
+        android:title="User/Consultant login"
         />
 </menu>

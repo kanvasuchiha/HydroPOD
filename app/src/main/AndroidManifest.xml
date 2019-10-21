@@ -17,6 +17,7 @@
             android:name=".home_login"
             android:label="@string/title_activity_home_login"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,7 +34,8 @@
         <activity
             android:name=".userActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".SignUp"></activity>
 
         <meta-data

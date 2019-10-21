@@ -61,7 +61,7 @@ public class AdminLogin extends AppCompatActivity {
         ID_user=id;
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.login_user || id==R.id.login_consultant) {
+        if (id == R.id.login_user) {
             Intent intent1 = new Intent(AdminLogin.this, home_login.class);
             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
@@ -92,8 +92,14 @@ public class AdminLogin extends AppCompatActivity {
         ok.show();
     }
 
-    public void loginSubmit(View view)
+    public void loginSubmitAdmin(View view)
     {
+        Intent intent2 = new Intent(AdminLogin.this, adminHome.class);
+        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent2);
+
+
+        /*
         username= txt1.getEditText().getText().toString().trim();
         password= txt2.getEditText().getText().toString().trim();
         Toast.makeText(AdminLogin.this, username+password, Toast.LENGTH_LONG).show();
@@ -133,6 +139,7 @@ public class AdminLogin extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 
 

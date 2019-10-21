@@ -111,6 +111,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this); /////////////
 
+
         spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.Role, R.layout.color_spinner_layout);
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_layout);
@@ -128,7 +129,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
 
 
                 DatePickerDialog dialog = new DatePickerDialog(SignUp.this,
-                        android.R.style.Theme_Black_NoTitleBar_Fullscreen, onDateSetListener, year, month, day);
+                        android.R.style.Theme_DeviceDefault_Dialog_Alert, onDateSetListener, year, month, day);
 
                 //TO MAKE BACKGROUND TRANSPARENT
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -219,8 +220,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
     }
 
 
-
-
     public void confirmInput(View v) throws java.text.ParseException {
         textEmail.setError(null);
         textPassword.setError(null);
@@ -230,9 +229,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
             return;
         }
 
-        Intent intent=getIntent();
-        int id= Integer.parseInt(intent.getStringExtra("ID_USER"));
-
         Date date1 = new SimpleDateFormat("dd MMMMM yyyy").parse(txtDate.getText().toString());
 
         ParseObject client = new ParseObject("Client");
@@ -241,16 +237,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
         client.put("Sex", spinner.getSelectedItem().toString());
         client.put("DOB", date1);
         client.put("Mobile_Number", txtPhone.getText().toString());
-        client.put("Email_address", textEmail.getEditText().getText().toString().trim());
-        client.put("Current_address", txtAddress.getText().toString());
-        if(id==R.id.login_consultant)
-        {
-            client.put("Access_Level", "Consultant");
-        }
-        else if(id==R.id.login_user)
-        {
-            client.put("Access_Level", "User");
-        }
+        client.put("Email_Address", textEmail.getEditText().getText().toString().trim());
+        client.put("Current_Address", txtAddress.getText().toString());
+        client.put("Access_Level", spinner2.getSelectedItem().toString());
+
+
 
 
 
@@ -294,11 +285,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         texts = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(adapterView.getContext(), texts, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        texts = adapterView.getItemAtPosition(0).toString();
     }
 
 

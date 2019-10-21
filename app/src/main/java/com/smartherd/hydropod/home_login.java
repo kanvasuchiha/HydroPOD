@@ -17,8 +17,11 @@ import android.view.View;
 import android.view.MenuItem;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
@@ -104,14 +107,9 @@ public class home_login extends AppCompatActivity implements MasterPasswordDialo
             return true;
         }
 
-        else if(id==R.id.login_consultant)
-        {
-            Toast.makeText(home_login.this, "Chosen role: Consultant", Toast.LENGTH_LONG).show();
-
-        }
         else
         {
-            Toast.makeText(home_login.this, "Chosen role: User", Toast.LENGTH_LONG).show();
+            Toast.makeText(home_login.this, "Chosen role: User/Consultant", Toast.LENGTH_LONG).show();
 
         }
 
@@ -190,25 +188,30 @@ public class home_login extends AppCompatActivity implements MasterPasswordDialo
         @Override
         public void done(ParseUser parseUser, ParseException e) {
             if (parseUser != null) {
-                if(parseUser.getBoolean("emailVerified") && ID_user==parseUser.getInt("Access_Level")) {
+                if(parseUser.getBoolean("emailVerified")) {
                     Toast.makeText(home_login.this, "Login Sucessful"+ "\nWelcome, " + username + "!", Toast.LENGTH_LONG).show();
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Client");
+                    query.whereEqualTo("Email_Address", username);
+                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+                        public void done(ParseObject player, ParseException e) {
+                            if (e == null) {
+                                Toast.makeText(home_login.this, player.getString("Access_Level"), Toast.LENGTH_LONG).show();
+                                if(player.getString("Access_Level").equals("User"))
+                                {
+                                    Intent intent1 = new Intent(home_login.this, userActivity.class);
+                                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent1);
+                                }
+                                else if(player.getString("Access_Level").equals("Consultant"))
+                                {
+                                    Intent intent3 = new Intent(home_login.this, consultantHome.class);
+                                    intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent3);
+                                }
 
-                    switch(ID_user){
-                        case R.id.login_user:Intent intent1 = new Intent(home_login.this, userActivity.class);
-                            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent1);
-                            break;
-
-                        case R.id.login_admin:
-                            Toast.makeText(home_login.this, "Please select your role from the dropdown menu in the toolbar above", Toast.LENGTH_LONG).show();
-                            break;
-
-                        case R.id.login_consultant:
-                            Intent intent3 = new Intent(home_login.this, consultantHome.class);
-                            intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent3);
-                            break;
-                    }
+                            }
+                        }
+                    });
 
                 }
                 else if(ID_user!=parseUser.getInt("Access_Level"))
