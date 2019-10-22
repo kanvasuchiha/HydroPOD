@@ -88,6 +88,16 @@ public class userActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+        if (id == R.id.logout_user) {
+            Toast.makeText(userActivity.this, "Logged out.", Toast.LENGTH_LONG).show();
+            Intent intent3 = new Intent(userActivity.this, home_login.class);
+            intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent3);
+
+            // Handle the camera action
+        }
+
         /*
         if (id == R.id.nav_home) {
             // Handle the camera action
