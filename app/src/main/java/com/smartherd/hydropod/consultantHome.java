@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 public class consultantHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,10 +56,8 @@ public class consultantHome extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
-            Intent intent1 = new Intent(this, home_login.class);
-            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent1);
+//            super.onBackPressed();
+            Toast.makeText(consultantHome.this, "You cannot go back. Press logout in case you want to change accounts.", Toast.LENGTH_SHORT).show();
         }
     }
 

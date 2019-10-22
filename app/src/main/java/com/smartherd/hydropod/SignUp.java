@@ -266,7 +266,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    alertDisplayer("Successfully Signed up.","You have successfully signed up "+name+"\nYou will have to wait till our admin actually confirms your account. Until later then, Sayonara!!");
+                    alertDisplayer("Successfully Signed up.","You have successfully signed up "+name+"\nYou " +
+                            "will have to wait till our admin actually confirms your account. Until later then, Sayonara!!", "signin");
                     Toast.makeText(SignUp.this, "Congratulation "+txtName.getText().toString()+"!\nYou have successfully signed up as user", Toast.LENGTH_LONG).show();
                 } else {
                     ParseUser.logOut();
@@ -285,7 +286,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         texts = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(adapterView.getContext(), texts, Toast.LENGTH_LONG).show();
+        if(texts.equals("Admin"))
+        {
+            alertDisplayer("WARNING!!!","Make sure you do have the master password to " +
+                    "access the admin login privilege. First login needs to be done in less than 10 days " +
+                    "from now, otherwise criminal charges maybe imposed accordingly.", "asd");
+        }
+        else
+            Toast.makeText(adapterView.getContext(), texts, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -295,8 +303,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
 
 
 
-    private void alertDisplayer(String title,String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this)
+    private void alertDisplayer(String title, String message, final String text){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -304,9 +312,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, A
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         // don't forget to change the line below with the names of your Activities
-                        Intent intent = new Intent(SignUp.this, home_login.class);
+                        if(text=="signin")
+                        {Intent intent = new Intent(SignUp.this, home_login.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        startActivity(intent);}
                     }
                 });
         AlertDialog ok = builder.create();

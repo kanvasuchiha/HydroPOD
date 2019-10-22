@@ -17,8 +17,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class AdminLogin extends AppCompatActivity {
@@ -92,14 +95,13 @@ public class AdminLogin extends AppCompatActivity {
         ok.show();
     }
 
-    public void loginSubmitAdmin(View view)
+/*   public void loginSubmitAdmin(View view)
     {
         Intent intent2 = new Intent(AdminLogin.this, adminHome.class);
         intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent2);
 
 
-        /*
         username= txt1.getEditText().getText().toString().trim();
         password= txt2.getEditText().getText().toString().trim();
         Toast.makeText(AdminLogin.this, username+password, Toast.LENGTH_LONG).show();
@@ -115,15 +117,8 @@ public class AdminLogin extends AppCompatActivity {
                                 Toast.makeText(AdminLogin.this, "Please select your role from the dropdown menu in the toolbar above", Toast.LENGTH_LONG).show();
                                 break;
 
-                            case R.id.login_admin:
-                                Intent intent2 = new Intent(AdminLogin.this, AdminLogin.class);
-                                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent2);
-                                break;
 
-                            case R.id.login_consultant:
-                                Toast.makeText(AdminLogin.this, "Please select your role from the dropdown menu in the toolbar above", Toast.LENGTH_LONG).show();
-                                break;
+
                         }
 
                     }
@@ -139,8 +134,58 @@ public class AdminLogin extends AppCompatActivity {
                 }
             }
         });
-        */
     }
+    */
 
+
+
+    public void loginSubmitAdmin(View view)
+    {
+        username= txt1.getEditText().getText().toString().trim();
+        password= txt2.getEditText().getText().toString().trim();
+        Toast.makeText(AdminLogin.this, username+password, Toast.LENGTH_LONG).show();
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+                    if(parseUser.getBoolean("emailVerified")) {
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Client");
+                        query.whereEqualTo("Email_Address", username);
+                        query.getFirstInBackground(new GetCallback<ParseObject>() {
+                            public void done(ParseObject player, ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(AdminLogin.this, player.getString("Access_Level"), Toast.LENGTH_LONG).show();
+                                    if(player.getString("Access_Level").equals("Admin"))
+                                    {
+                                        Toast.makeText(AdminLogin.this, "Login Sucessful"+ "\nWelcome, " + username + "!", Toast.LENGTH_LONG).show();
+                                        Intent intent1 = new Intent(AdminLogin.this, adminHome.class);
+                                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent1);
+                                    }
+                                    else
+                                    {
+                                        alertDisplayer("Login Fail", "It seems like you did not signup for the admin privileges.", true);
+
+                                    }
+
+                                }
+                            }
+                        });
+
+                    }
+
+                    else
+                    {
+                        ParseUser.logOut();
+                        alertDisplayer("Login Fail", "It seems like our admin hasn't confirmed your application. We will reach you shortly.", true);
+                    }
+                    Toast.makeText(AdminLogin.this, "Sucessful Login"+"Welcome back" + username + "!",Toast.LENGTH_LONG).show();
+                } else {
+                    ParseUser.logOut();
+                    Toast.makeText(AdminLogin.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
 }
